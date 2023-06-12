@@ -8,7 +8,9 @@ type TListVal = TListKey[keyof TListKey];
 type TFn = TListVal | ((arg: TListVal) => TListVal);
 
 type TAddPrefix<T> = {
-  [K in keyof T as `use${Capitalize<string & K>}`]: (arg: T[K]) => T[K];
+  [K in keyof T as `use${Capitalize<string & K>}`]: (
+    arg: T[K] | ((arg: T[K]) => T[K])
+  ) => T[K];
 };
 
 type TState<T> = T & TAddPrefix<T>;
